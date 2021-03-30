@@ -74,18 +74,20 @@ RUN \
         LD_LIBRARY_PATH=/usr/local/lib64 ffmpeg -buildconf
 
 ####################################################
+
+ADD ./protobuf-3.6.1 /protobuf-3.6.1
+
 # build protobuf 3
 RUN  \
         yum install -y libatomic libatomic_ops-devel && \
-        DIR=$(mktemp -d) && cd ${DIR} && \
-        git clone https://github.com/protocolbuffers/protobuf.git && cd protobuf && \
-        git submodule update --init --recursive && \
+        cd /protobuf-3.6.1 && \
         ./autogen.sh && \
         ./configure CXXFLAGS=-Wno-unused-variable && make && make check && make install && \
         ldconfig
+        rm -rf /protobuf-3.6.1
 
 #################
-# build FFdynamic
-RUN  \
-        git clone https://github.com/Xingtao/FFdynamic.git && cd FFdynamic && \
-        cd apps/interactiveLive && ./build.sh
+# # build FFdynamic
+# RUN  \
+#         git clone https://github.com/Xingtao/FFdynamic.git && cd FFdynamic && \
+#         cd apps/interactiveLive && ./build.sh
