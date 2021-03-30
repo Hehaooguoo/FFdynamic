@@ -37,14 +37,14 @@ out_setting_id_1080p = "1080p_4000kb"
 out_setting_id_udp_720p = "udp_720p"
 
 # chnage to your files
-input1 = "bunny.avi"
-input2 = "soccer_adidas_ad.mp4"
-input3 = "nba_ad.mp4"
+input1 = "1.mp4"
+input2 = "2.mp4"
+input3 = "3.mp4"
 
 output_dir = "./" #"../testScripts"
 fullurl_output_720 = "output_720p.flv"
 fullurl_output_1080 = "output_1080p.flv"
-fullurl_output_udp_720 = "udp://127.0.0.1:12345"
+fullurl_output_udp_720 = "udp://172.20.188.27:12345"
 
 def get_new_output(output_setting_id, output_full_url):
     new_output = ial_request.AddNewOutputStream()

@@ -1,1 +1,1 @@
-docker build --rm=true -t "ffdynamic:ial" -f ial_dockerfile ./ 
+docker build --rm=true -t "ffdynamic:mcu" -f ial_dockerfile ./ 
