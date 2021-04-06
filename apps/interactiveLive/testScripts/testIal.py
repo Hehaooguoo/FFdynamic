@@ -35,15 +35,19 @@ uri_update_mix_setting = "/api1/ial/update_mix_setting"
 out_setting_id_720p = "720p_2000kb"
 out_setting_id_1080p = "1080p_4000kb"
 out_setting_id_udp_720p = "udp_720p"
-
+out_setting_id_rtmp_720p = "rtmp_720p"
 # chnage to your files
-input1 = "1.mp4"
-input2 = "2.mp4"
-input3 = "3.mp4"
+input1 = "rtmp://58.200.131.2:1935/livetv/cctv1"
+input2 = "rtmp://58.200.131.2:1935/livetv/cctv2"
+input3 = "rtmp://58.200.131.2:1935/livetv/cctv3"
+input4 = "rtmp://58.200.131.2:1935/livetv/cctv4"
+input5 = "rtmp://58.200.131.2:1935/livetv/cctv5"
+input6 = "rtmp://58.200.131.2:1935/livetv/cctv6"
 
 output_dir = "./" #"../testScripts"
-fullurl_output_720 = "output_720p.flv"
+fullurl_output_720 = "out_put_720p.flv"
 fullurl_output_1080 = "output_1080p.flv"
+fullurl_output_rtmp_720 = "rtmp://47.106.60.245:1935/live/nZPbzRIpnyrMT0_BTuS151cz0hz8OH7yYu9OyK5YgtJb9YRL5fKmQl-77O-tcIk9GSjG7e6XAMBh6MMiZlbwbOxds9aK7-Gwq53cPd3uGhTUionMm8q0gwJyHvowpoJF?668616059"
 fullurl_output_udp_720 = "udp://172.20.188.27:12345"
 
 def get_new_output(output_setting_id, output_full_url):
@@ -75,21 +79,27 @@ def sendCreateRoom():
     #create_room.input_urls.append()
     create_room.room_output_base_url = output_dir
     new_output = create_room.output_stream_infos.add()
-    new_output.output_setting_id = out_setting_id_720p
-    new_output.output_urls.append(fullurl_output_720)
+    new_output.output_setting_id = out_setting_id_rtmp_720p
+    new_output.output_urls.append(fullurl_output_rtmp_720)
 
     response = request("POST", http_dst + uri_create_room, data = MessageToJson(create_room))
     print (response.url, response.text)
 
 def addNewInput():
     new_input = ial_request.AddNewInputStream()
-    choise = input("Enter choise 1, 2 or 3 to add input1, input2, input3: ")
+    choise = input("Enter choise number 1-6 to add input: ")
     if choise == "1":
         new_input.input_url = input1
     elif choise == "2":
         new_input.input_url = input2
     elif choise == "3":
         new_input.input_url = input3
+    elif choise == "4":
+        new_input.input_url = input4
+    elif choise == "5":
+        new_input.input_url = input5
+    elif choise == "6":
+        new_input.input_url = input6
     else:
         print ("not valid choise " + choise + ", do nothing")
         return
@@ -102,8 +112,8 @@ def addNewOutput():
     if choise == "1":
         new_output.output_setting_id = out_setting_id_1080p
     elif choise == "2":
-        new_output.output_setting_id = out_setting_id_udp_720p
-        new_output.output_urls.append(fullurl_output_udp_720)
+        new_output.output_setting_id = out_setting_id_rtmp_720p
+        new_output.output_urls.append(fullurl_output_rtmp_720)
     else:
         print ("not valid choise " + choise + ", do nothing")
         return
@@ -120,6 +130,12 @@ def closeOneInput():
         one_input.input_url = input2
     elif choise == "3":
         one_input.input_url = input3
+    elif choise == "4":
+        one_input.input_url = input4
+    elif choise == "5":
+        one_input.input_url = input5
+    elif choise == "6":
+        one_input.input_url = input6
     else:
         print ("not valid choise " + choise + ", do nothing")
         return

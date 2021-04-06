@@ -91,7 +91,7 @@ int IalService::onCreateRoom(shared_ptr<Response> & response, const IalRequest::
         return failResponse(response, API_ERRCODE_INVALID_MIX_SETTING,
                             "Fail create room " + m_appInfo.m_msgDetail);
     }
-    LOG(INFO) << m_logtag << "craete mix streamlet done";
+    LOG(INFO) << m_logtag << "create mix streamlet done";
 
     /* 3. connect mix & outputs */
     auto mixStreamlet = m_river.get(DavMixStreamletTag(m_mixStreamletName));

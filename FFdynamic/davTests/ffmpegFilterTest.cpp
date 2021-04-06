@@ -26,7 +26,7 @@ using namespace global_sighandle;
 int main(int argc, char **argv) {
     testInit(argv[0]);
 
-    string inUrl = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    string inUrl = "rtmp://mobliestream.c3tv.com:554/live/goodtv.sdp";
     if (argc >= 2) inUrl = argv[1];
 
     // 1. create demux and get stream info

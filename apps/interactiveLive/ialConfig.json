@@ -28,7 +28,7 @@
       "border_width": 2,
       "border_color": 0,
       "fillet_radius": 0,
-      "backgroud_image_path": "../../../asset/ffdynamic-bg1.jpg",
+      "backgroud_image_path": "../../asset/ffdynamic-bg1.jpg",
       "layout_info" : {"layout": "eLayoutAuto", "cells": []}
     },
     "audio_mix" : {"frame_size" : 1024, "b_mute_at_start" : false}
@@ -79,6 +79,27 @@
       ]
     },
 
+    "rtmp_720p" : {
+        "video_encode" : {
+          "encode_type": "ffmpeg",
+          "codec_name": "libx264",
+          "framerate": 25,
+          "avdict_encode_option":  {"width" : "1280", "height" : "720", "bufsize" : "2000k", "maxrate" : "2000k",
+                                    "preset" : "fast", "profile" : "high", "aq-strength" : "1"}
+        },
+        "audio_encode" : {
+          "encode_type" : "ffmpeg",
+          "codec_name" : "aac-he",
+          "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "44100"}
+        },
+  
+        "pre_encode_video_filter" : {},
+        "pre_encode_audio_filter" : {},
+        "mux_outputs" : [
+          {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
+        ]
+      },
+
     "1080p_4000kb" : {
       "video_encode" : {
         "encode_type": "ffmpeg",
@@ -109,7 +130,7 @@
     "http_server_port" : 8080,
 
     "input_max_buf_num" : 40,
-    "mix_max_buf_num" : 25,
+    "mix_max_buf_num" : 0,
     "output_max_buf_num" : 0,
 
     "glog_save_level" : "info",

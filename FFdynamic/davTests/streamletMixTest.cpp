@@ -55,10 +55,10 @@ int main(int argc, char **argv) {
     DavWaveOption audioEncodeOption((DavWaveClassAudioEncode()));
     // 6. mux1 & mux2
     DavWaveOption muxOption1((DavWaveClassMux()));
-    // muxOption1.set(DavOptionContainerFmt(), "flv");
-    // muxOption1.set(DavOptionOutputUrl(), "rtmp://127.0.0.1/test");
     muxOption1.set(DavOptionContainerFmt(), "flv");
-    muxOption1.set(DavOptionOutputUrl(), "mix.flv");
+    muxOption1.set(DavOptionOutputUrl(), "rtmp://47.106.60.245:1935/live/nZPbzRIpnyrMT0_BTuS151cz0hz8OH7yYu9OyK5YgtJb9YRL5fKmQl-77O-tcIk9GSjG7e6XAMBh6MMiZlbwbOxds9aK7-Gwq53cPd3uGhTUionMm8q0gwJyHvowpoJF?668616059");
+    // muxOption1.set(DavOptionContainerFmt(), "flv");
+    // muxOption1.set(DavOptionOutputUrl(), "mix.flv");
     DavWaveOption muxOption2((DavWaveClassMux()));
     muxOption2.set(DavOptionOutputUrl(), "mix.mp4");
     // 7. audio mix
