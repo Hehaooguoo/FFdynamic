@@ -46,7 +46,7 @@
       },
       "audio_encode" : {
         "encode_type" : "ffmpeg",
-        "codec_name" : "aac-he",
+        "codec_name" : "aac",
         "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "44100"}
       },
 
@@ -68,7 +68,7 @@
       },
       "audio_encode" : {
         "encode_type" : "ffmpeg",
-        "codec_name" : "aac-he",
+        "codec_name" : "aac",
         "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "44100"}
       },
 
@@ -83,18 +83,20 @@
         "video_encode" : {
           "encode_type": "ffmpeg",
           "codec_name": "libx264",
-          "framerate": 25,
-          "avdict_encode_option":  {"width" : "1280", "height" : "720", "bufsize" : "2000k", "maxrate" : "2000k",
-                                    "preset" : "fast", "profile" : "high", "aq-strength" : "1"}
+          "fps_num" : 25,
+          "fps_den" : 1,
+          "avdict_encode_option": {"video_size" : "1280x720", "bufsize" : "2000k", "maxrate" : "2000k",
+            "preset" : "fast", "g" : "60", "rc-lookahead" : "30"}
         },
         "audio_encode" : {
           "encode_type" : "ffmpeg",
-          "codec_name" : "aac-he",
+          "codec_name" : "aac",
           "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "44100"}
         },
   
         "pre_encode_video_filter" : {},
-        "pre_encode_audio_filter" : {},
+        "pre_encode_audio_filter" : {"filter_type" : "ffmpeg",
+            "filter_arg" : "acrossfade=d=10:o=0:c1=exp:c2=exp"},
         "mux_outputs" : [
           {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
         ]
@@ -111,7 +113,7 @@
       },
       "audio_encode" : {
         "encode_type" : "ffmpeg",
-        "codec_name" : "aac-he",
+        "codec_name" : "aac",
         "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "44100"}
       },
 
@@ -127,7 +129,7 @@
 
   "app_global_setting" : {
     "http_server_addr" : "127.0.0.1",
-    "http_server_port" : 8080,
+    "http_server_port" : 9307,
 
     "input_max_buf_num" : 40,
     "mix_max_buf_num" : 0,

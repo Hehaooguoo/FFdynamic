@@ -12,7 +12,7 @@ import davWaveSetting_pb2 as wave
 import ialRequest_pb2 as ial_request
 import ialConfig_pb2 as ial_config
 
-http_dst = "http://127.0.0.1:8080"
+http_dst = "http://127.0.0.1:9307"
 
 uri_create_room = "/api1/ial/create_room"
 uri_add_new_input =  "/api1/ial/add_new_input_stream"
@@ -47,7 +47,8 @@ input6 = "rtmp://58.200.131.2:1935/livetv/cctv6"
 output_dir = "./" #"../testScripts"
 fullurl_output_720 = "out_put_720p.flv"
 fullurl_output_1080 = "output_1080p.flv"
-fullurl_output_rtmp_720 = "rtmp://47.106.60.245:1935/live/nZPbzRIpnyrMT0_BTuS151cz0hz8OH7yYu9OyK5YgtJb9YRL5fKmQl-77O-tcIk9GSjG7e6XAMBh6MMiZlbwbOxds9aK7-Gwq53cPd3uGhTUionMm8q0gwJyHvowpoJF?668616059"
+#fullurl_output_rtmp_720 = "rtmp://47.106.60.245:1935/live/nZPbzRIpnyrMT0_BTuS151cz0hz8OH7yYu9OyK5YgtJb9YRL5fKmQl-77O-tcIk9GSjG7e6XAMBh6MMiZlbwbOxds9aK7-Gwq53cPd3uGhTUionMm8q0gwJyHvowpoJF?668616059"
+fullurl_output_rtmp_720 = "rtmp://10.12.30.47:1935/live/livestream"
 fullurl_output_udp_720 = "udp://172.20.188.27:12345"
 
 def get_new_output(output_setting_id, output_full_url):
@@ -76,6 +77,7 @@ def sendCreateRoom():
     create_room = ial_request.CreateRoom()
     create_room.room_id = "ial_test"
     create_room.input_urls.append(input1)
+    create_room.input_urls.append(input2)
     #create_room.input_urls.append()
     create_room.room_output_base_url = output_dir
     new_output = create_room.output_stream_infos.add()
@@ -108,22 +110,28 @@ def addNewInput():
 
 def addNewOutput():
     new_output = ial_request.AddNewOutput()
-    choise = input("Enter choise 1, for 1080p output setting; 2, for udp 720p setting: ")
+    choise = input("Enter choise\n 1. 720p.flv\n 2. 1080p.flv\n 3. udp 720p\n 4. rtmp_720p\n to add new out_set 1-4: ")
     if choise == "1":
-        new_output.output_setting_id = out_setting_id_1080p
+        new_output.output_setting_id = out_setting_id_720p
+        new_output.output_urls.append(fullurl_output_720)
     elif choise == "2":
+        new_output.output_setting_id = out_setting_id_1080p
+        new_output.output_urls.append(fullurl_output_1080)
+    elif choise == "3":
+        new_output.output_setting_id = out_setting_id_udp_720p
+        new_output.output_urls.append(fullurl_output_udp_720)
+    elif choise == "4":
         new_output.output_setting_id = out_setting_id_rtmp_720p
         new_output.output_urls.append(fullurl_output_rtmp_720)
     else:
         print ("not valid choise " + choise + ", do nothing")
         return
-
     response = request("POST", http_dst + uri_add_new_output, data = MessageToJson(new_output))
     print (response.url, response.text)
 
 def closeOneInput():
     one_input = ial_request.CloseOneInputStream()
-    choise = input("Enter choise 1, 2 or 3. to close input1, input2 or input3: ")
+    choise = input("Enter choise number 1-6 to close input:  ")
     if choise == "1":
         one_input.input_url = input1
     elif choise == "2":
@@ -144,7 +152,18 @@ def closeOneInput():
 
 def closeOneOutput():
     one_output = ial_request.CloseOneOutput()
-    one_output.output_setting_id = out_setting_id_1
+    choise = input("Enter choise\n 1. 720p.flv\n 2. 1080p.flv\n 3. udp 720p\n 4. rtmp_720p\n to close output 1-4: ")
+    if choise == "1":
+        one_output.output_setting_id = out_setting_id_720p
+    elif choise == "2":
+        one_output.output_setting_id = out_setting_id_1080p
+    elif choise == "3":
+        one_output.output_setting_id = out_setting_id_udp_720p
+    elif choise == "4":
+        one_output.output_setting_id = out_setting_id_rtmp_720p
+    else:
+        print ("not valid choise " + choise + ", do nothing")
+        return
     response = request("POST", http_dst + uri_close_one_output, data = MessageToJson(one_output))
     print (response.url, response.text)
 

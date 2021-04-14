@@ -59,7 +59,7 @@ RUN  \
         --enable-nonfree --enable-gpl --enable-version3 \
         --disable-doc --enable-shared --enable-postproc \
         --enable-libx264 --enable-libx265 \
-         --enable-cuda --enable-libnpp --enable-nvenc --enable-cuvid \
+        --enable-cuda --enable-libnpp --enable-nvenc --enable-cuvid \
         --extra-cflags="-I/usr/local/cuda/include -I${PREFIX}/include -I/usr/local/ -I/usr/local/include" \
         --extra-ldflags="-L${PREFIX}/lib -L/usr/local/cuda/lib64"\
         --extra-libs=-ldl \

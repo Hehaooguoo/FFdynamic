@@ -1,2 +1,4 @@
 tools/dockerlize/ial_docker/protobuf-3.6.1/*
 apps/interactiveLive/build/*
+apps/interactiveLive/out_put_720p.flv
+apps/interactiveLive/log/*
